@@ -31,12 +31,19 @@ type Artist struct {
 func main() {
 
 	var links API
+	//var Artists Artist
 	linkAPI := "https://groupietrackers.herokuapp.com/api"
 	jsonErr := json.Unmarshal(openLink(linkAPI), &links)
 	if jsonErr != nil {
 		log.Fatal(jsonErr)
 	}
-	fmt.Println(links)
+	fmt.Println(links.Artists)
+
+	// jsonErr := json.Unmarshal(openLink(string(links.Artists)), &Artists)
+	// if jsonErr != nil {
+	// 	log.Fatal(jsonErr)
+	// }
+	// fmt.Println(links)
 }
 func openLink(linkAPI string) []byte { // read file by http:
 	response, err := http.Get(linkAPI)
