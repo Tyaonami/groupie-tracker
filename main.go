@@ -7,11 +7,12 @@ import (
 	"log"
 	"net/http"
 )
-type API struct{
-	Artists string
+
+type API struct {
+	Artists   string
 	Locations string
-	Dates string
-	Relation string
+	Dates     string
+	Relation  string
 }
 
 type Artist struct {
@@ -30,23 +31,20 @@ type Artist struct {
 func main() {
 
 	var links API
-	//var artist []Artist
-
-	
-
-	response, err := http.Get("https://groupietrackers.herokuapp.com/api")
-	check(err)
-
-	fApi, err := io.ReadAll(response.Body)
-	check(err)
-	defer response.Body.Close()
-	jsonErr := json.Unmarshal(fApi, &links)
+	linkAPI := "https://groupietrackers.herokuapp.com/api"
+	jsonErr := json.Unmarshal(openLink(linkAPI), &links)
 	if jsonErr != nil {
 		log.Fatal(jsonErr)
 	}
-
 	fmt.Println(links)
-
+}
+func openLink(linkAPI string) []byte { // read file by http:
+	response, err := http.Get(linkAPI)
+	check(err)
+	Body, err := io.ReadAll(response.Body)
+	check(err)
+	defer response.Body.Close()
+	return Body
 }
 func check(e error) {
 	if e != nil {
