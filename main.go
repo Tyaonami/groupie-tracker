@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"strings"
 	"text/template"
 )
 
@@ -27,10 +28,10 @@ type Artist struct {
 	MeberStr     string
 	CreationDate int
 	FirstAlbum   string
-	Focations    string
+	Locations    string
 	ConcertDates string
 	Relations    string
-	Concert      Relation
+	Concert      map[string][]string
 }
 
 var links API
@@ -94,9 +95,8 @@ func handleRequest() {
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	http.HandleFunc("/", index)
 	//http.HandleFunc("/404", err404)
-	log.Println("Server running ")
+	log.Println("Server running http://localhost:8080")
 	http.ListenAndServe(":8080", nil)
-	log.Println("Server running on: http://localhost:8080")
 
 }
 
@@ -119,11 +119,20 @@ func getArtist() {
 	for i, value := range Artists {
 
 		var rel Relation
+		rel1 := make(map[string][]string)
 		jsonErr = json.Unmarshal(openLink(value.Relations), &rel)
 		if jsonErr != nil {
 			log.Fatal(jsonErr)
 		}
-		Artists[i].Concert = rel
+		for k, v := range rel.DatesLocations {
+			l := strings.ReplaceAll(k, "-", ", ")
+			l = strings.ReplaceAll(l, "_", " ")
+			l = strings.Title(l)
+			rel1[l] = v
+			//fmt.Println(k)
+		}
+		Artists[i].Concert = rel1
+		//	fmt.Println(Artists[i].Concert)
 	}
 
 }
