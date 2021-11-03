@@ -1,0 +1,61 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url("../img/main3.png");
+    font-family: Roboto, sans;
+    background-position: center center; /* Положение фона */
+    background-repeat: no-repeat; /* Отменяем повторение фона */
+    font-size: 12pt;
+}
+
+a{
+  font-size: 11pt;
+}
+input::placeholder {
+  font-size: 0.8em;
+}
+.content{
+    background-color: #f8f9fa;
+}
+.mainHeading{
+  /*background-color: #f8f9fa;*/
+  padding-top: 300px;
+  padding-bottom: 200px;
+  height: 100px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.mainHeading h1{
+  text-align: center;
+  font-family: 'Major Mono Display', monospace;
+  font-weight: 700;
+  color: rgb(148, 7, 7);
+  margin-bottom: 20px;
+}
+.mainHeading h3{
+  text-align: center;
+  font-family: 'Major Mono Display', monospace;
+  font-weight: 700;
+  font-size: 12pt;
+  color: rgb(148, 7, 7);
+  margin-top: 25px;
+}
+
+hr {
+  border: none; /* Убираем границу */
+  background-color: rgb(148, 7, 7); /* Цвет линии */
+  color: rgb(148, 7, 7); /* Цвет линии для IE6-7 */
+  height: 2px; /* Толщина линии */
+  width: 300px;
+  margin: auto;
+  opacity: 1;
+
+ }
+ a:hover{
+  color: rgb(148, 7, 7);
+ }
