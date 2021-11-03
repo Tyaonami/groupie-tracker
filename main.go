@@ -2,10 +2,10 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"net/http"
+	"text/template"
 )
 
 type Relation struct {
@@ -33,10 +33,75 @@ type Artist struct {
 	Concert      Relation
 }
 
-func main() {
+var links API
+var Artists []Artist
 
-	var links API
-	var Artists []Artist
+type Errors struct {
+	Number  int
+	Message string
+}
+
+var errResult string
+var err int
+
+func main() {
+	getArtist()
+	//fmt.Println(Artists)
+	handleRequest()
+
+}
+
+// index page, if address != index, you are redirect to 404err func
+func index(w http.ResponseWriter, r *http.Request) {
+	tmpl, tmplErr := template.ParseFiles("templates/index.html", "templates/header.html", "templates/footer.html")
+
+	if tmplErr != nil {
+		err = 404
+		errResult = "This page is not exist"
+		w.WriteHeader(http.StatusNotFound)
+	}
+	if r.URL.Path != "/" {
+		err = 404
+		errResult = "This page is not exist"
+		//err404(w, r)
+		return
+	} else {
+		tmpl.ExecuteTemplate(w, "index", Artists)
+	}
+}
+
+func err404(w http.ResponseWriter, r *http.Request) {
+	tmpl, tmplErr := template.ParseFiles("templates/404.html", "templates/header.html", "templates/footer.html")
+	dataErr := Errors{err, errResult}
+
+	if tmplErr != nil {
+		err = 404
+		errResult = "This page is not exist"
+		w.WriteHeader(http.StatusNotFound)
+	}
+	if err == 404 {
+		w.WriteHeader(http.StatusNotFound)
+	} else if err == 400 {
+		w.WriteHeader(http.StatusBadRequest)
+	} else {
+		w.WriteHeader(http.StatusInternalServerError)
+	}
+
+	tmpl.ExecuteTemplate(w, "404", dataErr)
+
+}
+func handleRequest() {
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+	http.HandleFunc("/", index)
+	//http.HandleFunc("/404", err404)
+	log.Println("Server running ")
+	http.ListenAndServe(":8080", nil)
+	log.Println("Server running on: http://localhost:8080")
+
+}
+
+func getArtist() {
+
 	// var Relations []Relation
 	//var Relation Relation
 	linkAPI := "https://groupietrackers.herokuapp.com/api"
@@ -60,7 +125,6 @@ func main() {
 		}
 		Artists[i].Concert = rel
 	}
-	fmt.Println(Artists)
 
 }
 
