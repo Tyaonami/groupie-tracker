@@ -8,6 +8,33 @@
   box-sizing: border-box;
 }
 
+body {
+  padding: 0;
+  margin: 0;
+  font-weight: normal;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  min-height: 100vh;
+  font-family: Roboto, sans;
+
+  font-size: 12pt;
+}
+
+a {
+  font-size: 11pt;
+}
+
+
+
+/*-------------------CARD EDIT----------------*/
+.row {
+  --bs-gutter-x: 0;
+}
+
 .blog-card {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -181,6 +208,9 @@
     padding-left: 25px;
   }
 }
+
+
+/*-------------BUTTON EDIT----------*/
 .btn {
   font-family: 'Major Mono Display', monospace;
   padding-top: 7px;
@@ -202,29 +232,9 @@
   color: white;
 }
 
-body {
-  padding: 0;
-  margin: 0;
-  font-weight: normal;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  min-height: 100vh;
-  background-image: url("../img/main3.png");
-  font-family: Roboto, sans;
-  background-position: center center;
-  /* Положение фона */
-  background-repeat: no-repeat;
-  /* Отменяем повторение фона */
-  font-size: 12pt;
-}
+/*-------BTN end -------*/
 
-a {
-  font-size: 11pt;
-}
+/*----------Placeholder ---------------*/
 
 input::-webkit-input-placeholder {
   font-size: 0.8em;
@@ -246,21 +256,50 @@ input::placeholder {
   background-color: #f8f9fa;
 }
 
+
 .mainHeading {
-  /*background-color: #f8f9fa;*/
   padding-top: 300px;
   padding-bottom: 200px;
   height: 100px;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   position: relative;
 }
 
-.mainHeading h1 {
+
+a:hover {
+  
+  
+  color: #940707;
+}
+
+/*# sourceMappingURL=index.css.map */
+
+/* MAIN PICTURE */
+
+.img-container {
+  background-size: cover;
+  width: 100%;
+  max-height: 600px;
+  min-height: 300px;
+  overflow: hidden;
+  text-align: center;
+  
+}
+.img-container img {
+  max-width:100%;
+  height:auto;
+}
+
+.img-container h1 {
+  position	: absolute;
+	top		: 300px;
+	left		: 0;
+	width		: 100%;
   text-align: center;
   font-family: 'Major Mono Display', monospace;
   font-weight: 700;
@@ -268,7 +307,11 @@ input::placeholder {
   margin-bottom: 20px;
 }
 
-.mainHeading h3 {
+.img-container h3 {
+  position	: absolute;
+	top		: 400px;
+	left		: 0;
+	width		: 100%;
   text-align: center;
   font-family: 'Major Mono Display', monospace;
   font-weight: 700;
@@ -277,21 +320,17 @@ input::placeholder {
   margin-top: 25px;
 }
 
-hr {
+.img-container hr {
+  position	: absolute;
+	top		: 375px;
+	left		: 250px;
+  right: 250px;
+	width		: 100%;
   border: none;
-  /* Убираем границу */
   background-color: #940707;
-  /* Цвет линии */
   color: #940707;
-  /* Цвет линии для IE6-7 */
-  height: 2px;
-  /* Толщина линии */
+  height: 1px;
   width: 300px;
   margin: auto;
   opacity: 1;
 }
-
-a:hover {
-  color: #940707;
-}
-/*# sourceMappingURL=index.css.map */

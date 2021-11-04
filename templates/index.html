@@ -1,31 +1,50 @@
 {{ define "index" }}
 {{ template "header"}}
-<table bordercolor="red" border="1"  width="100%" rules="rows">
-{{range .}}
-<tr><td>
-<img src= {{.Image}}>
-</td>
-<td>
-{{.Name}}
-</td>
-<td>
-    {{range .Members}}  
-    <p>{{.}}</p>
-    {{end}}
-</td>
-<td>
-{{.CreationDate}}
-</td>
-<td>
-{{.FirstAlbum}}
-</td>
-<td>
-    {{range .Concert}}  
-    <p>{{.}}</p>
-    {{end}}
-</td>
-</tr>
-{{end}}
-</table>
-{{ template "footer"}}
-{{ end }}
+<div class="img-container ">
+  <img src="static/img/main.png" alt="">
+  <h1> groupie tracker </h1>
+  <hr class="line">
+  <h3> information about some bands and upcoming concert</h3>
+</div>
+    <div style="clear:both"></div>
+  
+
+
+    <div class="content">
+        <div class="row text-center" style="padding-top: 50px;">
+            {{range .}}
+            <div class="blog-card">
+                <div class="meta">
+                  <div class="photo" style="background-image: url({{.Image}})"></div>
+                </div>
+        
+        
+                <div class="description">
+                  <h1>{{.Name}}</h1>
+                  <h2><strong>Creation date: </strong> {{.CreationDate}} </h2>
+                  <h2><strong> First album: </strong>{{.FirstAlbum}} </h2>
+                  <p style="text-align: left;"><strong> Members: </strong><br>
+                    {{range .Members}}
+                    {{.}}<br>
+                    {{end}}
+                  </p>
+                  <p class="read-more">
+                    <a href="#">consert info</a>
+                  </p>
+                </div>
+            </div>
+
+      {{end}} 
+    </div>
+  </div>
+    
+
+    {{ template "footer"}}
+    {{ end }}
+      
+      
+        
+
+
+
+
