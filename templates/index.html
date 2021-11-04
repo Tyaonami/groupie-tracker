@@ -10,16 +10,16 @@
   
 
 
-    <div class="content">
-        <div class="row text-center" style="padding-top: 50px;">
-            {{range .}}
-            <div class="blog-card">
-                <div class="meta">
+<div class="content">
+    <div class="row text-center" style="padding-top: 50px;">
+        {{range .}}
+        <div class="blog-card">
+              <div class="meta">
                   <div class="photo" style="background-image: url({{.Image}})"></div>
-                </div>
+              </div>
         
         
-                <div class="description">
+              <div class="description">
                   <h1>{{.Name}}</h1>
                   <h2><strong>Creation date: </strong> {{.CreationDate}} </h2>
                   <h2><strong> First album: </strong>{{.FirstAlbum}} </h2>
@@ -31,12 +31,12 @@
                   <p class="read-more">
                     <a href="#">consert info</a>
                   </p>
-                </div>
-            </div>
+              </div>
+        </div>
 
-      {{end}} 
+        {{end}} 
     </div>
-  </div>
+</div>
     
 
     {{ template "footer"}}
