@@ -20,8 +20,8 @@
 {{.FirstAlbum}}
 </td>
 <td>
-    {{range .Concert}}      <p>{{.Location}}        {{.Dates}}</p>    {{end}}
-    {{range .Concert.Dates}}      <p>{{.}}</p>    {{end}}
+    {{range .Concert}}      <p>{{.Location}}    </p> {{range .Dates}}      <p>{{.}}</p>    {{end}}   {{end}}
+
 
 </td>
 </tr>
