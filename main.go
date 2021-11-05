@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -12,6 +13,10 @@ import (
 type Relation struct {
 	Id             int
 	DatesLocations map[string][]string
+}
+type ConcertInfo struct {
+	Location string
+	Dates    []string
 }
 type API struct {
 	Artists   string
@@ -31,7 +36,7 @@ type Artist struct {
 	Locations    string
 	ConcertDates string
 	Relations    string
-	Concert      map[string][]string
+	Concert      []ConcertInfo
 }
 
 var links API
@@ -47,8 +52,15 @@ var err int
 
 func main() {
 	getArtist()
-	//fmt.Println(Artists)
 	handleRequest()
+
+}
+func handleRequest() {
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+	http.HandleFunc("/", index)
+	http.HandleFunc("/404", err404)
+	log.Println("Server running http://localhost:8080")
+	http.ListenAndServe(":8080", nil)
 
 }
 
@@ -91,14 +103,6 @@ func err404(w http.ResponseWriter, r *http.Request) {
 	tmpl.ExecuteTemplate(w, "404", dataErr)
 
 }
-func handleRequest() {
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
-	http.HandleFunc("/", index)
-	//http.HandleFunc("/404", err404)
-	log.Println("Server running http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
-
-}
 
 func getArtist() {
 
@@ -119,20 +123,26 @@ func getArtist() {
 	for i, value := range Artists {
 
 		var rel Relation
-		rel1 := make(map[string][]string)
+		var rel11 ConcertInfo
+		var rel1 []ConcertInfo
 		jsonErr = json.Unmarshal(openLink(value.Relations), &rel)
 		if jsonErr != nil {
 			log.Fatal(jsonErr)
 		}
 		for k, v := range rel.DatesLocations {
+			i := 0
 			l := strings.ReplaceAll(k, "-", ", ")
 			l = strings.ReplaceAll(l, "_", " ")
 			l = strings.Title(l)
-			rel1[l] = v
+			rel11.Location = l
+			rel11.Dates = v
+			rel1 = append(rel1, rel11)
+
+			i += 1
 			//fmt.Println(k)
 		}
 		Artists[i].Concert = rel1
-		//	fmt.Println(Artists[i].Concert)
+		fmt.Println(Artists[i].Concert)
 	}
 
 }
