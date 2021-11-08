@@ -1,0 +1,31 @@
+{{ define "index" }}
+{{ template "header"}}
+<table bordercolor="red" border="1"  width="100%" rules="rows">
+{{range .}}
+<tr><td>
+<img src= {{.Image}}>
+</td>
+<td>
+{{.Name}}
+</td>
+<td>
+    {{range .Members}}  
+    <p>{{.}}</p>
+    {{end}}
+</td>
+<td>
+{{.CreationDate}}
+</td>
+<td>
+{{.FirstAlbum}}
+</td>
+<td>
+    {{range .Concert}}  
+    <p>{{.}}</p>
+    {{end}}
+</td>
+</tr>
+{{end}}
+</table>
+{{ template "footer"}}
+{{ end }}

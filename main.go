@@ -56,7 +56,7 @@ func main() {
 
 }
 func handleRequest() {
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./templates/static"))))
 	http.HandleFunc("/", index)
 	http.HandleFunc("/404", err404)
 	log.Println("Server running http://localhost:8080")
