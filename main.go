@@ -61,7 +61,7 @@ func handleRequest() {
 	http.HandleFunc("/artist", showArtist)
 	http.HandleFunc("/404", err404)
 	log.Println("Server running http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
+	log.Fatal(http.ListenAndServe(":8080", nil))
 
 }
 func showArtist(w http.ResponseWriter, r *http.Request) {
