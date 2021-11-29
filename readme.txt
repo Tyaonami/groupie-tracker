@@ -6,4 +6,3 @@ Run the program (go run .)
 Open web browser 
 Print into address bar: "localhost:8080"
 
-by Nadia Artapmonova, Aleksei Vasiljev, Tatiana Mikhina
